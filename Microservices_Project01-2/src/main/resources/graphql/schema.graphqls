@@ -1,0 +1,19 @@
+type User {
+    id: ID!
+    userName: String!
+    email: String!
+    password:String!
+    phone:String!
+    address:String!   
+}
+
+type Query {
+    fetchAllUser: [User!]!
+    fetchUserByID(id: ID!): User
+}
+
+type Mutation {
+    registerUser(userName: String!, email: String!,password:String!,phone:String!,address:String!): User!
+    updateUserDetials(id: ID!, userName: String!, email: String!,password:String!,phone:String!,address:String!): User!
+    deleteUser(id: ID!): User!
+}

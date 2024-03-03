@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User List</title>
+</head>
+<body>
+    <h2>User List</h2>
+    <ul id="userList">
+       
+    </ul>
+
+    <div id="reviewForm" style="display: none;">
+        <!-- Review form will be displayed here -->
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Fetch user list from backend
+          
+			  $.get("/user/findAll", function(users) {
+                users.forEach(function(user) {
+                    $("#userList").append("<li>" + user.username + " - <button class='reviewBtn' data-user='" + JSON.stringify(user) + "'>Review</button></li>");
+                });
+            });
+
+            // Review button click event
+            $(document).on("click", ".reviewBtn", function() {
+                var user = JSON.parse($(this).attr("data-user"));
+                $("#reviewForm").html("<h2>Reviewing Profile</h2>" +
+                                      "<p>Username: " + user.username + "</p>" +
+                                      "<p>Password: ********</p>" +
+                                      "<p>Phone Number: ***-***-" + user.phone.substring(user.phone.length - 4) + "</p>" +
+                                      "<p>Address: " + user.address.substring(0, user.address.indexOf(',', user.address.indexOf(',') + 1)) + "*****</p>" +
+                                      "<label>Validated: <input type='checkbox' id='validatedCheckbox'></label>" +
+                                      "<button id='submitBtn'>Submit</button>");
+
+                $("#reviewForm").show();
+            });
+
+            // Submit button click event
+            $(document).on("click", "#submitBtn", function() {
+                var user = JSON.parse($(".reviewBtn").attr("data-user"));
+                var validated = $("#validatedCheckbox").is(":checked");
+
+                user.validated = validated;
+
+                // Submit reviewed profile to backend
+                $.ajax({
+                    url: "/api/users/review",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify(user),
+                    success: function() {
+                        alert("Profile reviewed and submitted successfully.");
+                        $("#reviewForm").hide();
+                    },
+                    error: function() {
+                        alert("Failed to submit profile review.");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
