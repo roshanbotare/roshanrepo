@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <!-- Bootstrap CSS -->
+ <link href=
+ "https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+         rel="stylesheet" integrity=
+ "sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+         crossorigin="anonymous" />
+<title>User Registration</title>
+<script>
+function validateForm() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    var firstName = document.getElementById("firstName").value;
+    var lastName = document.getElementById("lastName").value;
+    var dob = document.getElementById("dob").value;
+    var address = document.getElementById("address").value;
+    var phoneNumber = document.getElementById("phoneNumber").value;
+
+   
+    var nameRegex = /^[a-zA-Z ]+$/;
+    var phoneRegex = /^[0-9]+$/;
+    var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+    if (!nameRegex.test(firstName) || !nameRegex.test(lastName)) {
+        alert("First name and last name should not contain numbers.");
+        return false;
+    }
+
+    if (!phoneRegex.test(phoneNumber)) {
+        alert("Phone number should be numerical.");
+        return false;
+    }
+
+    if (!passwordRegex.test(password)) {
+        alert("Password should have at least one letter and one number, and no special characters.");
+        return false;
+    }
+
+
+    return true;
+}
+</script>
+</head>
+<body>
+<h2>User Registration</h2>
+<form onsubmit="return validateForm()">
+    <label for="username">Username:</label>
+    <input type="text" id="username" required><br><br>
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" required><br><br>
+    
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" required><br><br>
+    
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" required><br><br>
+    
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" required><br><br>
+    
+    <label for="address">Address:</label>
+    <textarea id="address" rows="3" required></textarea><br><br>
+    
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="text" id="phoneNumber" required><br><br>
+    
+    <input type="submit" value="Submit">
+</form>
+</body>
+</html>
