@@ -9,7 +9,6 @@ public class HDFCBankAccount implements BankAccount {
 	private String accHName;
 	private double balance;
 	
-	
 	public HDFCBankAccount(long accNum, String accHName, double balance) {
 		super();
 		this.accNum = accNum;
@@ -68,3 +67,4 @@ public class HDFCBankAccount implements BankAccount {
 	
 
 }
+
