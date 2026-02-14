@@ -1,7 +1,6 @@
 package com.pojo;
 public class Department {
-	
-    private int id;
+	private int id;
     private String name;
 
     public Department(int id, String name) {
@@ -32,3 +31,4 @@ public class Department {
     }
 
 }
+
