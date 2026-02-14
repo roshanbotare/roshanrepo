@@ -17,6 +17,7 @@ public class Department {
         this.id = id;
     }
 
+	
     public String getName() {
         return name;
     }
@@ -29,4 +30,5 @@ public class Department {
     public String toString() {
         return "Department{id=" + id + ", name='" + name + "'}";
     }
+
 }
